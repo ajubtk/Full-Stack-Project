@@ -1,5 +1,4 @@
-import razorpay
-from django.conf import settings
+
 import uuid
 from datetime import datetime
 from django.db.models import Count, Q
