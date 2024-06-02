@@ -45,3 +45,63 @@
 .goodnesssec a{
     text-decoration: none;
 }
+
+.custom-btn {
+    padding: 4px 8px; /* Adjust padding for better spacing */
+    margin: 2px;
+    font-size: 0.8rem; /* Adjust font size */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners for a more attractive look */
+    background-color: #f8f9fa; /* Light background color */
+    color: #343a40; /* Dark text color */
+    cursor: pointer; /* Pointer cursor for better UX */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.custom-btn:hover {
+    background-color: #343a40; /* Darker background on hover */
+    color: #ffffff; /* White text on hover */
+}
+
+.custom-remove-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px; /* Adjust padding for better spacing */
+    margin-right: 6px; /* Adjust right margin for spacing */
+    font-size: 0.9rem; /* Adjust font size */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #343a40; /* Dark background color */
+    color: #ffffff; /* White text color */
+    cursor: pointer; /* Pointer cursor for better UX */
+    text-decoration: none; /* Remove underline from link */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.custom-remove-btn i {
+    margin-left: 5px; /* Space between text and icon */
+}
+
+.custom-remove-btn:hover {
+    background-color: #495057; /* Slightly lighter dark background on hover */
+        color: #ffffff; /* Ensure text remains white on hover */
+}
+
+
+.address-card {
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border: none;
+    }
+    .address-card.selected {
+        border: 2px solid rgba(240, 192, 34, 0.4);
+    }
+
+body {
+    margin-bottom: 60px; /* Adjust this value to be equal or more than the footer height */
+}
+
+footer {
+    height: 35px; /* Set a specific height for the footer */
+    line-height: 20px; /* Center the text vertically */
+}

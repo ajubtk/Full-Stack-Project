@@ -1,0 +1,115 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} Checkout {% endblock %}
+
+{% block main-content %}
+    <div class="container">
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{msg}}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="row mt-5">
+            <div class="col-sm-6">
+                <h4 class="mb-4">Order Summary</h4>
+                <hr>
+                {% for item in cart_items %}
+                <div class="card mb-3 shadow-sm border-0">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <img src="{{item.product.product_image.url}}" width="60px" height="40px" class="me-3 rounded">
+                            <div>
+                                <h5 class="fw-bold mb-1">{{item.product.title}}</h5>
+                                <p class="mb-0">Quantity: <span class="text-danger fw-bold">{{item.quantity}}</span></p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="fw-bold mb-0">Price: ₹{{item.product.discount_price}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="card mt-4 p-4 shadow-sm border-0 bg-light">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="fw-bold fs-5 mb-0">Total Cost</p>
+                        <p class="fw-bold fs-5 mb-0">₹{{totalamount}}</p>
+                    </div>
+                    <p class="text-muted mb-1">Including ₹40 Delivery Fee</p>
+                    <hr>
+                    <div id="alertContainer"></div>
+                    <div class="form-check mt-3">
+                        <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                        <label class="form-check-label text-muted" for="termsCheck" id="labelTermsCheck">
+                            Terms and Conditions: By accessing or using the Service, you agree to be bound by these Terms and Conditions. If you disagree with any part of these Terms and Conditions, then you may not access the Service.
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 offset-sm-1">
+                <h4>Select Shipping Address</h4>
+                <hr>
+                <form method="post" id="myform">
+                    {% csrf_token %}
+                    {% for ad in add %}
+                    <div class="address-card card mb-3 shadow-sm" data-id="{{ad.id}}" onclick="selectAddress(this)">
+                        <div class="card-body">
+                            <h5 class="mb-4">{{ad.name}}</h5>
+                            <p>Mobile: {{ad.mobile}}</p>
+                            <p>{{ad.locality}} {{ad.city}} {{ad.state}} - {{ad.zipcode}}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <input type="hidden" name="custid" id="custid" value="">
+                    <div class="form-check mb-3">
+                        <label for="totalamount" class="form-label">Total Amount</label>
+                        <input type="number" class="form-control" name="totalamount" value="{{totalamount}}" readonly>
+                    </div>
+                    <div id="addressAlertContainer"></div>
+                    <div class="text-center">
+                        <a href="{% url 'showcart' %}"><button type="button" class="btn btn-dark mt-3 px-5 fw-bold">Back</button></a>
+                        <button id="rzp-button1" type="submit" class="btn btn-warning mt-3 px-5 fw-bold" onclick="return validateForm()" style="margin-left: 40px">Payment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectAddress(id) {
+            document.getElementById('custid').value = id;
+            document.querySelectorAll('.address-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelector(`[data-id="${id}"]`).classList.add('selected');
+        }
+    </script>
+{% endblock main-content %}
+
+{% block payment-gateway %}
+<script>
+    var options = {
+        "key": "{{rzp_test_35fC1SBkfYDbkX}}",
+        "amount": "{{razoramount}}",
+        "currency": "INR",
+        "name": "Ecommerce Project",
+        "description": "Purchase Product",
+        "order_id": "{{order_id}}",
+        "handler": function (response) {
+            var form = document.getElementById("myform");
+            window.location.href = `http://localhost:8000/paymentdone?order_id=${response.razorpay_order_id}&payment_id=${response.razorpay_payment_id}&cust_id=${form.elements["custid"].value}`;
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function (e) {
+        e.preventDefault();
+        if (validateForm()) {
+            rzp1.open();
+        }
+    };
+</script>
+{% endblock payment-gateway %}
