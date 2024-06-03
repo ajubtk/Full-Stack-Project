@@ -38,12 +38,14 @@ urlpatterns = [
     path('cart/', views.show_cart, name='showcart'),
     path('checkout/', views.checkout, name='checkout'),
     path('orders/', views.orders, name='orders'),
-    #path('paymentdone', views.payment_done, name='paymentdone'),
-
+    path('search', views.search, name='search'),
 
     path('pluscart/', views.plus_cart),
     path('minuscart/', views.minus_cart),
     path('removecart/', views.remove_cart),
+    path('pluswishlist/', views.plus_wishlist),
+    path('minuswishlist/', views.minus_wishlist),
+    path('showwishlist/', views.show_wishlist, name='wishlist'),
 
                   #login authentications
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
@@ -57,3 +59,8 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/', auth_view.PasswordResetConfirmView.as_view(template_name='app/password_reset_confirm.html', form_class=MySetPasswordForm), name='password_reset_confirm'),
     path('password-reset-complete/', auth_view.PasswordResetCompleteView.as_view(template_name='app/password_reset_complete.html'), name='password_reset_complete'),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = 'Fullstack Project'
+admin.site.site_title = 'Fullstack Project'
+admin.site.site_index_title = 'Welcome to Fullstack Project'

@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} Wishlist {% endblock %}
+
+{% block main-content %}
+<div class="container my-5">
+    {% if wishlist %}
+    <h1 class="text-center mb-5">Wishlist</h1>
+    <div class="row justify-content-center">
+        <div class="col-sm-10">
+            <div class="card">
+                <div class="card-body">
+                    {% for item in wishlist %}
+                    <div class="row">
+                        <div class="col-sm-3 text-center align-self-center"><a href="{% url 'product-detail' item.product.id %}"><img src="{{item.product.product_image.url}}" alt="" srcset="" class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div></a>
+                        <div class="col-sm-9">
+                            <div>
+                                <h5>{{item.product.title}}</h5>
+                                <p class="mb-2 text-muted small">{{item.product.description}}</p>
+                                <div class="d-flex mt-3">
+                                    <a href="#" class="minus-wishlist btn custom-remove-btn" pid="{{item.product.id}}">Remove <i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    <a href="{% url 'product-detail' item.product.id %}" class="minus-wishlist btn btn-warning">Add to Cart <i class="fa fa-cart-shopping" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="text-muted">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    {% else %}
+        <h1 class="text-center mb-5">Wishlist is Empty</h1>
+    {% endif %}
+</div>
+{% endblock main-content %}

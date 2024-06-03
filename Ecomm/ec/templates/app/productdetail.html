@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row flex justify-content-between mt-5">
             <div class="img2 col-lg-5 mt-5">
-                <img src="{{product.product_image.url}}" class="image col-xs-6 col-sm-12 col-lg-12 mt-3 text-sm-center w-100 h-75 alt="">
+                <img src="{{product.product_image.url}}" class="image col-xs-6 col-sm-12 col-lg-12 mt-3 text-sm-center w-100 h-75" alt="">
             </div>
             <div class="productdetail col-lg-5 mt-4">
                 <h2 style="font-size: 40px;">{{product.title}}</h2>
@@ -21,6 +21,15 @@
                         <button type="submit" class="btn btn-warning shadow px-5 py-2">Add to Cart</button>
                     </form>
                     <a href="{% url 'showcart' %}" class="btn btn-dark shadow px-5 py-2 m-4">Buy Now</a>
+                    {% if wishlist %}
+                    <a pid={{product.id}} class="minus-wishlist btn bg-white px-2 py-1" style="margin-right: 20px; margin-bottom: 3px">
+                            <i class="fa-solid fa-heart fa-2x text-danger" style="font-size: 40px;"></i>
+                    </a>
+                    {% else %}
+                    <a pid={{product.id}} class="plus-wishlist btn bg-white px-2 py-1" style="margin-right: 20px; margin-bottom: 2px">
+                            <i class="fa-regular fa-heart fa-2x text-danger" style="font-size: 40px; "></i>
+                    </a>
+                    {% endif %}
             </div>
         </div>
     </div>

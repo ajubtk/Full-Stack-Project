@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'all.min.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,14 +31,12 @@
             Products
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'category' 'ML' %}">Milk</a></li>
-            <li><a class="dropdown-item" href="{% url 'category' 'CR' %}">Curd</a></li>
-            <li><a class="dropdown-item" href="{% url 'category' 'MS' %}">Milkshake</a></li>
-            <li><a class="dropdown-item" href="{% url 'category' 'LS' %}">Lassi</a></li>
-            <li><a class="dropdown-item" href="{% url 'category' 'GH' %}">Ghee</a></li>
-            <li><a class="dropdown-item" href="{% url 'category' 'PN' %}">Paneer</a></li>
-            <li><a class="dropdown-item" href="{% url 'category' 'CZ' %}">Cheese</a></li>
-            <li><a class="dropdown-item" href="{% url 'category' 'IC' %}">Ice-creams</a></li>
+            <li><a class="dropdown-item" href="{% url 'category' 'LP' %}">Laptops</a></li>
+            <li><a class="dropdown-item" href="{% url 'category' 'MP' %}">Mobile Phones</a></li>
+            <li><a class="dropdown-item" href="{% url 'category' 'EP' %}">Earphones</a></li>
+            <li><a class="dropdown-item" href="{% url 'category' 'TV' %}">TV Monitors</a></li>
+            <li><a class="dropdown-item" href="{% url 'category' 'CM' %}">Cameras</a></li>
+            <li><a class="dropdown-item" href="{% url 'category' 'SP' %}">Speakers</a></li>
           </ul>
         </li>
 
@@ -51,8 +48,8 @@
           <a class="nav-link text-white" href="{% url 'contact' %}">Contact Us</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <form class="d-flex" role="search" action="/search">
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
         <button class="btn btn-dark btn-outline-light" type="submit">Search</button>
       </form>
     </div>
@@ -76,7 +73,7 @@
               <a href="{% url 'showcart' %}" class="nav-link text-white"><i class="fa-solid fa-cart-shopping fa-lg"></i> Cart <span class="badge bg-danger">{% if totalitem > 0 %} {{totalitem}} {% endif %}</span> </a>
           </li>
           <li class="nav-item">
-              <a href="#" class="nav-link text-white"><i class="fa-solid fa-heart fa-lg"></i> Wishlist 4</a>
+              <a href="{% url 'wishlist' %}" class="nav-link text-white"><i class="fa-solid fa-heart fa-lg"></i> Wishlist <span class="badge bg-danger">{% if wishitem > 0 %} {{wishitem}} {% endif %}</span> </a>
           </li>
           {% else %}
           <li class="nav-item">

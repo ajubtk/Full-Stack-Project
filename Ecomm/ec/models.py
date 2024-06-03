@@ -2,14 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 
 CATEGORY_CHOICES = (
-    ('CR', 'Curd'),
-    ('ML', 'Milk'),
-    ('LS', 'Lassi'),
-    ('MS', 'Milkshake'),
-    ('PN', 'Paneer'),
-    ('GH', 'Ghee'),
-    ('CZ', 'Cheese'),
-    ('IC', 'Ice-Creams'),
+    ('LP', 'Laptops'),
+    ('EP', 'Earphones'),
+    ('CM', 'Cameras'),
+    ('TV', 'TV Monitors'),
+    ('MP', 'Mobile Phones'),
+    ('SP', "Speakers")
 )
 
 STATE_CHOICES = (
@@ -109,3 +107,8 @@ class OrderPlaced(models.Model):
     @property
     def total_cost(self):
         return self.quantity * self.product.discount_price
+
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
