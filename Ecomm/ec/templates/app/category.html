@@ -16,9 +16,9 @@
                 <div class="row">
                     {% for prod in product %}
                         <div class="col mb-4">
-                            <a href="{% url 'product-detail' prod.id %}" class="btn shadow-sm curdbgpro">
+                            <a href="{% url 'product-detail' prod.id %}" class="btn shadow-sm curdbgpro p-0">
                                 <div>
-                                    <img src="{{prod.product_image.url}}" width="300px" height="200px" />
+                                    <img src="{{prod.product_image.url}}" width="300px" height="250" />
                                     <div class="fw-bold">{{prod.title}}</div>
                                     <div class="fw-bold text-danger">
                                         Rs.{{prod.discount_price}}/-

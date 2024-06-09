@@ -20,13 +20,12 @@
                         <input type="hidden" name="prod_id" value={{product.id}}>
                         <button type="submit" class="btn btn-warning shadow px-5 py-2">Add to Cart</button>
                     </form>
-                    <a href="{% url 'showcart' %}" class="btn btn-dark shadow px-5 py-2 m-4">Buy Now</a>
                     {% if wishlist %}
-                    <a pid={{product.id}} class="minus-wishlist btn bg-white px-2 py-1" style="margin-right: 20px; margin-bottom: 3px">
+                    <a pid={{product.id}} class="minus-wishlist btn bg-white px-2 py-1" style="float:right; margin-right: 20px; margin-bottom: 3px">
                             <i class="fa-solid fa-heart fa-2x text-danger" style="font-size: 40px;"></i>
                     </a>
                     {% else %}
-                    <a pid={{product.id}} class="plus-wishlist btn bg-white px-2 py-1" style="margin-right: 20px; margin-bottom: 2px">
+                    <a pid={{product.id}} class="plus-wishlist btn bg-white px-2 py-1" style="float:right; margin-right: 20px; margin-bottom: 2px">
                             <i class="fa-regular fa-heart fa-2x text-danger" style="font-size: 40px; "></i>
                     </a>
                     {% endif %}

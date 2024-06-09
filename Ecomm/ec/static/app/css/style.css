@@ -9,9 +9,9 @@
     background-image: -moz-linear-gradient(#fff7ef, #fff);
     background-image: -ms-linear-gradient(#fff7ef, #fff);
     background-image: -o-linear-gradient(#fff7ef, #fff);
-    padding: 50px 40px;
+
     border: 1px solid #efe8e1;
-    padding-bottom: 20px;
+    padding-bottom: 0;
 }
 
 .smbg{

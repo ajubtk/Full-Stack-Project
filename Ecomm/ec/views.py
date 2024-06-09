@@ -77,7 +77,6 @@ class ProductDetail(View):
             wishlist = Wishlist.objects.filter(Q(product=product) & Q(user=request.user))
         return render(request, 'app/productdetail.html', locals())
 
-@method_decorator(login_required, name='dispatch')
 class CustomerRegistrationView(View):
     def get(self, request):
         form = CustomerRegistrationForm()
@@ -230,14 +229,14 @@ def checkout(request):
 
     return redirect('orders')
 
-@login_required
+
 def generate_order_id():
     current_time = datetime.now().strftime('%Y%m%d%H%M%S')
     unique_id = uuid.uuid4().hex[:6].upper()
     unique_key = f"{current_time}_{unique_id}"
     return 'ORD' + unique_key
 
-@login_required
+
 def generate_payment_id():
         current_time = datetime.now().strftime('%Y%m%d%H%M%S')
         unique_id = uuid.uuid4().hex[:6].upper()
